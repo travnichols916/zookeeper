@@ -1,4 +1,5 @@
 const express = require('express');
+const PORT = process.env.PORT || 3001;
 //Instantiate the server
 const app = express();
 const { animals } = require('./data/animals');
@@ -49,7 +50,7 @@ function filterByQuery(query, animalsArray) {
     }
     res.json(results);
   });
-  const PORT = process.env.PORT || 3001;
+  
 
 
 //Listen for requests
