@@ -42,16 +42,21 @@ function filterByQuery(query, animalsArray) {
     // return the filtered results:
     return filteredResults;
   }
+//takes in the id and array of animals and returns a single animal object, as shown in the following code
+  function findById(id, animalsArray) {
+    const result = animalsArray.filter(animal => animal.id === id)[0];
+    return result;
+  }
 
-  app.get('/api/animals', (req, res) => {
-    let results = animals;
-    if (req.query) {
-      results = filterByQuery(req.query, results);
-    }
-    res.json(results);
-  });
-  
-
+//Get request
+app.get('/api/animals/:id', (req, res) => {
+  const result = findById(req.params.id, animals);
+  if (result) {
+    res.json(result);
+  } else {
+    res.send(404);
+  }
+});
 
 //Listen for requests
 app.listen(PORT, () => {
